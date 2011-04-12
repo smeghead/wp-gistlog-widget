@@ -3,9 +3,9 @@
 Plugin Name: WP-Gistlog-Widget
 Plugin URI: 
 Description: This plugin allows you to display the gistlog.org histories.
-Version: 1.0.0
-Author: smeghead
- */
+Version: 1.1.0
+Author: smeghead, fukata
+*/
 
 // wpgw_options_page() displays the page content for the Test Options submenu
 function wpgw_options_page() {
@@ -13,6 +13,7 @@ function wpgw_options_page() {
   $widget_title = get_option('wpgw_widget_title');
   $user_id = get_option('wpgw_user_id' );
   $type = get_option('wpgw_type' );
+  $display_gist_num = get_option('wpgw_display_gist_num' );
 
   // See if the user has posted us some information
   // If they did, this hidden field will be set to 'Y'
@@ -20,9 +21,11 @@ function wpgw_options_page() {
     $widget_title = $_POST['wpgw_widget_title'];
     $user_id = $_POST['wpgw_user_id'];
     $type = $_POST['wpgw_type'];
+    $display_gist_num = $_POST['wpgw_display_gist_num'];
     update_option('wpgw_widget_title', $widget_title);
     update_option('wpgw_user_id', $user_id);
     update_option('wpgw_type', $type);
+    update_option('wpgw_display_gist_num', $display_gist_num);
   }
 ?>
 
@@ -38,13 +41,16 @@ function wpgw_options_page() {
       <option value="recent">recent</options>
     </select>
   </p>
+  <p><?php _e("Display Gist Num:", 'mt_trans_domain') ?><input type="text" name="wpgw_display_gist_num" value="<?php echo $display_gist_num; ?>" size="4" maxlength="3"/></p>
 <?php
 }
 
 function get_widget_url() {
   $user_id = get_option('wpgw_user_id'); 
   $type = get_option('wpgw_type');
-  return "http://www.gistlog.org/{$user_id}/widget.js?type={$type}";
+  $display_num = get_option('wpgw_display_gist_num');
+  $display_num = $display_num ? "&num={$display_num}" : '';
+  return "http://www.gistlog.org/{$user_id}/widget.js?type={$type}{$display_num}";
 }
 function wpgw_show_widget($args) {
   $widget_title = get_option('wpgw_widget_title'); 

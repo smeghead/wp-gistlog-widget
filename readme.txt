@@ -3,7 +3,7 @@ Contributors: smeghead
 Tags: applie, widget, widgets
 Requires at least: 3.0.0
 Tested up to: 3.0.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 This plugin allows you to display the gistlog.org histories.
 
@@ -20,5 +20,7 @@ This plugin allows you to display the gistlog.org histories.
 
 == Changelog ==
 
+= 1.1.0 =
+* 2011-04-12 Add option "Display Gist Num" 
 = 1.0.0 =
 * 2011-04-12 First release
