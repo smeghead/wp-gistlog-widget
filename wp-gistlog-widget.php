@@ -67,7 +67,7 @@ function wpgw_show_widget($args) {
   preg_match_all('/<a href="([^"]*)"[^>]*>([^>]*)<\/a>/', $contents, $matches, PREG_PATTERN_ORDER);
   echo '<ul>';
   for ($i = 0; $i < count($matches[0]); $i++) {
-    echo "<li><a href=\"{$matches[1][$i]}\">{$matches[2][$i]}</a></li>\n";
+    echo "<li><a href=\"{$matches[1][$i]}\" target=\"_blank\">{$matches[2][$i]}</a></li>\n";
   }
   echo '</ul>';
 ?>
