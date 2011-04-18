@@ -63,8 +63,14 @@ function wpgw_show_widget($args) {
   echo $args['before_title'] . $widget_title . $args['after_title'] . $args['before_widget'];
 
   $widget_url = get_widget_url();
+  $contents = file_get_contents($widget_url);
+  preg_match_all('/<a href="([^"]*)"[^>]*>([^>]*)<\/a>/', $contents, $matches, PREG_PATTERN_ORDER);
+  echo '<ul>';
+  for ($i = 0; $i < count($matches[0]); $i++) {
+    echo "<li><a href=\"{$matches[1][$i]}\">{$matches[2][$i]}</a></li>\n";
+  }
+  echo '</ul>';
 ?>
-  <script type="text/javascript" src="<?php echo $widget_url ?>"></script>
   <?php
   echo $args['after_widget'];
 }
